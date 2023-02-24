@@ -1,0 +1,38 @@
+<div class="container">
+    <h2>Dodaj Klienta</h2>
+    <form action="/customer/edit/{{_id}}" method="POST">
+        <div class="mb-3">
+            <label class="form-label" for="name"><strong>Nazwa klienta</strong></label>
+             <input name="name" placeholder="Nazwa klienta" type="text" id="name" class="form-control" value="{{name}}">
+        </div>
+
+        <fieldset class="mb-3">
+        <strong>Adres</strong>
+
+        <div class="mb-1">
+            <label class="form-label" for="street">Ulica numer</label>
+            <input name="street" placeholder="Ulica numer" type="text" id="street" class="form-control" value="{{address.street}}">
+        </div>
+
+        <div class="mb-1">
+            <label class="form-label" for="zipCode">Kod pocztowy</label>
+            <input name="zipCode" placeholder="Kod pocztowy" type="text" id="zipCode" class="form-control" value="{{address.zipCode}}">
+        </div>
+
+        <div class="mb-1">
+            <label class="form-label" for="city">Miasto</label>
+            <input name="city" placeholder="Miasto" type="text" id="city" class="form-control" value="{{address.city}}">
+        </div>
+
+        </fieldset>
+
+        <div class="mb-3">
+            <label class="form-label" for="nip"><strong>NIP</strong></label>
+            <input name="nip" placeholder="NIP klienta" type="text" id="nip" class="form-control" value="{{nip}}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Edytuj</button>
+
+    </form>
+
+</div>
