@@ -33,6 +33,7 @@ module.exports = {
         newCustomer.save();
         res.redirect('/customer');
     },
+    
     update: (req, res) => {
         const customer = {
             name: req.body.name,

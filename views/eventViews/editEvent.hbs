@@ -1,0 +1,34 @@
+<div class="container">
+    
+    <h2>Edytuj Wydarzenie</h2>
+    <form action="/event/edit/{{_id}}" method="POST">
+
+        <div class="mb-3">
+            <label class="form-label" for="contactDate"><strong>Data kontaktu</strong></label>
+            <input type="date" class="form-control" id="contactDate" name="contactDate" value="{{contactDate}}">
+        </div>
+
+        <div class="mb-3">
+          <label for="type"><strong>Typ</strong></label>
+          <select id="type" name="type" class="form-select" aria-label="Default select example">
+            <option value="">Choose...</option>
+            <option value="phone" {{#if (eq event "phone")}}selected{{/if}}>Telefon</option>
+            <option value="email" {{#if (eq event "email")}}selected{{/if}}>E-mail</option>
+            <option value="meeting" {{#if (eq event "meeting")}}selected{{/if}}>Spotkanie</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="description"><strong>Opis</strong></label>
+            <input type="text" placeholder="Opis" class="form-control" id="dexcription" name="description" value="{{description}}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="name"><strong>Nazwa klienta</strong></label>
+            <input type="text" placeholder="Nazwa klienta" class="form-control" id=name name="name" value="{{name}}">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Edytuj</button>
+    </form>
+
+</div>
