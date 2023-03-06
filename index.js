@@ -29,7 +29,7 @@ app.use(express.urlencoded({extended: true}));
 const customerRouter = require('./routes/customerRouters');
 app.use('/customer', customerRouter);
 
-const eventRouter = require('./routes/eventRoutes');
+const eventRouter = require('./routes/eventRouters');
 app.use('/event', eventRouter);
 
 
