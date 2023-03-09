@@ -1,7 +1,7 @@
 <div class="container">
     
     <h2>Edytuj Wydarzenie</h2>
-    <form action="/event/edit/{{_id}}" method="POST">
+    <form action= "/customer/{{_customerId}}/editEvent/{{_id}}" method="PUT">
 
         <div class="mb-3">
             <label class="form-label" for="contactDate"><strong>Data kontaktu</strong></label>
@@ -23,11 +23,6 @@
             <input type="text" placeholder="Opis" class="form-control" id="dexcription" name="description" value="{{description}}">
         </div>
 
-        <div class="mb-3">
-            <label class="form-label" for="name"><strong>Nazwa klienta</strong></label>
-            <input type="text" placeholder="Nazwa klienta" class="form-control" id=name name="name" value="{{name}}">
-        </div>
-        
         <button type="submit" class="btn btn-primary">Edytuj</button>
     </form>
 

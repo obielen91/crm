@@ -1,4 +1,5 @@
 const Customer = require('../models/CustomerModel');
+const Event = require('../models/EventModel');
 
 module.exports = {
     index: (req, res) => {
@@ -11,11 +12,12 @@ module.exports = {
     },
 
     customer: (req, res) => {
-        Customer.findById(req.params.id).exec((err, customer) => {
+        Customer.findById(req.params.id).populate('events').exec((err, customer) => {
             if (err) {
                 res.send('Get customer error');
             }
-            res.render('customerViews/singleCustomer', customer);
+
+            res.render('customerViews/singleCustomer', customer);   
         });
     },
 

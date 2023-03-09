@@ -7,7 +7,36 @@
              <p class="card-text">{{nip}}</p>
              <a href="/customer/edit/{{_id}}" class="btn btn-primary">Edytuj</a>
              <a href="/customer/delete/{{_id}}" class="btn btn-danger">Usuń</a>
+             <a href="/customer/{{_id}}/addEvent" class="btn btn-primary">Dodaj wydarzenie</a>
         </div>   
     </div>
     
+</div>
+
+
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Data kontaktu</th>
+        <th scope="col">Typ</th>
+        <th scope="col">Opis</th>
+         <th scope="col">Akcje</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {{#each events}}
+      <tr>
+        <td>{{contactDate}}</td>
+        <td>{{type}}</td>
+        <td>{{description}}</td>
+        <td><a href="/customer/{{name}}/editEvent/{{_id}}" class="btn btn-warning">Edytuj</a>
+        <a href="/customer/{{name}}/deleteEvent/{{_id}}" class="btn btn-danger">Usuń</a></td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
 </div>
