@@ -12,11 +12,10 @@ module.exports = {
     },
 
     customer: (req, res) => {
-        Customer.findById(req.params.id).populate('events').exec((err, customer) => {
+        Customer.findById(req.params.id).populate('events').lean().exec((err, customer) => {
             if (err) {
                 res.send('Get customer error');
             }
-
             res.render('customerViews/singleCustomer', customer);   
         });
     },

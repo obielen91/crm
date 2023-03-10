@@ -42,16 +42,18 @@ module.exports = {
     // },
 
     editForm: (req, res) => {
-        Event.findById(req.param.eventId).exec((err, event) => {
+        console.log(req.params.eventId);
+        Event.findById(req.params.eventId).exec((err, event) => {
             if (err) {
                 res.send('Get event error');
             }
-            res.render('eventViews/editEvent', {...event, _customerId: req.params.customerId});
+            event.contactDate = event.contactDate.toDateString();
+            res.render('eventViews/editEvent', event);
         })
     },
 
     delete: (req, res) => {
-        Event.findOneAndDelete(req.param.eventId).exec((err) => {
+        Event.findOneAndDelete(req.params.eventId).exec((err) => {
             if (err) {
                 res.send('Delete event eror');
             }
