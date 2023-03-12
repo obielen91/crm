@@ -1,6 +1,8 @@
 const Event = require('../models/EventModel');
 const mongoose = require('mongoose');
 const Customer = require('../models/CustomerModel');
+const moment = require('moment');
+const EventTypeMapper = require('../mapper/eventTypeMapper');
 
 module.exports = {
 
@@ -32,22 +34,25 @@ module.exports = {
         });
     },
 
-    // update: (req, res) => {
-    //     Event.findByIdAndUpdate(req.param.id, (req.body)).exec((err, event) => {
-    //         if (err) {
-    //             res.send('Update event error');
-    //         }
-    //         res.redirect('/event');
-    //     })
-    // },
+    update: (req, res) => {
+        Event.findByIdAndUpdate(req.params.eventId, (req.body)).exec((err, event) => {
+            if (err) {
+                res.send('Update event error');
+            }
+            res.redirect('/customer/' + req.params.customerId);
+        })
+    },
 
     editForm: (req, res) => {
         console.log(req.params.eventId);
-        Event.findById(req.params.eventId).exec((err, event) => {
+        Event.findById(req.params.eventId).lean().exec((err, event) => {
             if (err) {
                 res.send('Get event error');
             }
-            event.contactDate = event.contactDate.toDateString();
+            event = {...event};
+
+            event.contactDate = moment(event.contactDate).format('YYYY-MM-DD');
+
             res.render('eventViews/editEvent', event);
         })
     },
@@ -57,6 +62,7 @@ module.exports = {
             if (err) {
                 res.send('Delete event eror');
             }
+            
             res.redirect('/customer/' + req.params.customerId);
         })
     },

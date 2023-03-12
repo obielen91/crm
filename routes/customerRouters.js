@@ -10,7 +10,7 @@ router.post('/add', customerController.create);
 router.get('/:customerId/addEvent', (req,res) => res.render('eventViews/addEvent', {_customerId: req.params.customerId}));
 router.post('/:customerId/addEvent', eventController.create);
 router.get('/:customerId/editEvent/:eventId', eventController.editForm);
-// router.post('/:customerId/addEvent', eventController.create);
+router.post('/:customerId/editEvent/:eventId', eventController.update);
 router.get('/:id', customerController.customer);
 router.get('/edit/:id', customerController.editCustomer);
 router.post('/edit/:id', customerController.update);

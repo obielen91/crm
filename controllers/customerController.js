@@ -1,5 +1,6 @@
 const Customer = require('../models/CustomerModel');
 const Event = require('../models/EventModel');
+const EventTypeMapper = require('../mapper/eventTypeMapper');
 
 module.exports = {
     index: (req, res) => {
@@ -16,6 +17,9 @@ module.exports = {
             if (err) {
                 res.send('Get customer error');
             }
+
+            customer.events = customer.events.map(event => ({...event, type: EventTypeMapper.toView(event.type)}))
+
             res.render('customerViews/singleCustomer', customer);   
         });
     },

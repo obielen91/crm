@@ -1,7 +1,7 @@
 <div class="container">
     
     <h2>Edytuj Wydarzenie</h2>
-    <form action= "/customer/{{_customerId}}/editEvent/{{_id}}" method="PUT">
+    <form action= "/customer/{{name}}/editEvent/{{_id}}" method="POST">
 
         <div class="mb-3">
             <label class="form-label" for="contactDate"><strong>Data kontaktu</strong></label>
@@ -12,9 +12,9 @@
           <label for="type"><strong>Typ</strong></label>
           <select id="type" name="type" class="form-select" aria-label="Default select example">
             <option value="">Choose...</option>
-            <option value="phone" {{#if (eq event "phone")}}selected{{/if}}>Telefon</option>
-            <option value="email" {{#if (eq event "email")}}selected{{/if}}>E-mail</option>
-            <option value="meeting" {{#if (eq event "meeting")}}selected{{/if}}>Spotkanie</option>
+            <option value="phone" {{#if (eq type "phone")}}selected{{/if}}>Telefon</option>
+            <option value="email" {{#if (eq type "email")}}selected{{/if}}>E-mail</option>
+            <option value="meeting" {{#if (eq type "meeting")}}selected{{/if}}>Spotkanie</option>
           </select>
         </div>
 
