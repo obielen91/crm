@@ -14,6 +14,10 @@ const Customer = new mongoose.Schema({
             ref: 'Event',
         },
     ],
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    }
 }, {
     timestamps: true,
 })

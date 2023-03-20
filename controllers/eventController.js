@@ -22,6 +22,7 @@ module.exports = {
     create: (req, res) => {
         let newEvent = new Event(req.body);
         newEvent.name = mongoose.Types.ObjectId(req.params.customerId);
+        newEvent.user = res.locals.userId;
         newEvent.save();
 
         Customer.findById(req.params.customerId).exec((err, customer) => {
@@ -30,6 +31,12 @@ module.exports = {
             }
             customer.events.push(newEvent._id);
             customer.save();
+
+            const user = res.locals.currentUser;
+
+            user.events.push(newEvent._id);
+            user.save();
+
             res.redirect('/customer/' + req.params.customerId);
         });
     },
@@ -62,7 +69,22 @@ module.exports = {
             if (err) {
                 res.send('Delete event eror');
             }
-            
+
+            const user = res.locals.currentUser;
+
+            const eventIndex = user.events.findIndex((eventId) => {
+                if (eventId.toString() === req.params.eventId) {
+                    return true;
+                }
+
+                return false;
+            });
+
+            if (eventIndex !== -1) {
+                user.events.splice(eventIndex, 1);
+                user.save();
+            }
+
             res.redirect('/customer/' + req.params.customerId);
         })
     },

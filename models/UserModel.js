@@ -9,6 +9,18 @@ const User = new mongoose.Schema(
         name: { type: String, require: true, unique: true },
         email: { type: String, require: true, unique: true },
         password: { type: String, require: true },
+        events: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Event',
+            },
+        ],
+        customers: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Customer',
+            },
+        ],
     },
     {
         timestamps: true,
@@ -27,19 +39,19 @@ User.pre('save', function (next) {
             return next();
         }
 
-    bcrypt.hash(user.password, salt, function (err, hash) {
-        if (err) {
-            return next();
-        }
-        user.password = hash;
-        next();
+        bcrypt.hash(user.password, salt, function (err, hash) {
+            if (err) {
+                return next();
+            }
+            user.password = hash;
+            next();
 
         })
     })
 });
 
 User.methods.generateAuthToken = (user) => {
-    const token = jwt.sign({_id: user._id}, 'secret', {expiresIn: '1h'});
+    const token = jwt.sign({ _id: user._id }, 'secret', { expiresIn: '1h' });
     return token;
 };
 

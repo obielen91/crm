@@ -2,7 +2,11 @@ const express = require('express');
 const app = express();
 const hbs = require('express-handlebars');
 const hbsHelpers = require('handlebars-helpers');
+const hbsDateformat = require('handlebars-dateformat');
 const mongoose = require('mongoose');
+const moment = require('moment');
+
+moment.locale('pl');
 
 const cookieParser = require('cookie-parser');
 
@@ -20,7 +24,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/crm')
 
 app.use(cookieParser());
 
-const hbsEngine = hbs.engine({extname: '.hbs'});
+const hbsEngine = hbs.engine({extname: '.hbs', helpers: { dateFormat: hbsDateformat }});
 hbsHelpers(hbsEngine.handlebars, {});
 app.engine('hbs', hbsEngine);
 app.set('view engine', 'hbs');

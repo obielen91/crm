@@ -1,10 +1,11 @@
 const Customer = require('../models/CustomerModel');
 const Event = require('../models/EventModel');
+const User = require('../models/UserModel');
 const EventTypeMapper = require('../mapper/eventTypeMapper');
 
 module.exports = {
     index: (req, res) => {
-        Customer.find({}).lean().exec((err, customers) => {
+        Customer.find({user: res.locals.userId}).lean().exec((err, customers) => {
             if (err) {
                 res.send('Get customers error');
             }
@@ -33,9 +34,16 @@ module.exports = {
                 city: req.body.city,
             },
             nip: req.body.nip,
+            user: res.locals.userId,
         }
         let newCustomer = new Customer(customer);
         newCustomer.save();
+       
+        const user = res.locals.currentUser;
+
+        user.customers.push(newCustomer._id);
+        user.save();
+
         res.redirect('/customer');
     },
     
@@ -62,6 +70,22 @@ module.exports = {
             if (err) {
                 res.send('Delete customer error');
             }
+
+            const user = res.locals.currentUser;
+
+            const customerIndex = user.customers.findIndex((customerId) => {
+                if (customerId.toString() === req.params.id) {
+                    return true;
+                }
+
+                return false;
+            });
+
+            if (customerIndex !== -1) {
+                user.customers.splice(customerIndex, 1);
+                user.save();
+            }
+
             res.redirect('/customer');
         })
     },

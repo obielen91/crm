@@ -9,6 +9,10 @@ const Event = new mongoose.Schema({
     name: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Customer',
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
     }
 }, {
     timestamps: true,
