@@ -6,7 +6,7 @@ const Event = new mongoose.Schema({
     contactDate: {type: Date, require: true},
     type: {type: String, enum: TypeEnum, require: true},
     description: {type: String, require: true},
-    name: {
+    customer: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Customer',
     },

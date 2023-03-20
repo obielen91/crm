@@ -6,22 +6,9 @@ const EventTypeMapper = require('../mapper/eventTypeMapper');
 
 module.exports = {
 
-    // funkcja zapisu --- poszukujemy użytkownika, tworzymy obiekt event i do obiektu dopisujemy użytkownika
-    // create: (req, res) => {
-    //     Customer.findById(req.params.customerId).exec((err, customer) => {
-    //         if (err) {
-    //             res.send('Get customer error');
-    //         }
-    //         let newEvent = new Event(req.body);
-    //         newEvent.name = mongoose.Types.ObjectId(req.params.customerId);
-    //         newEvent.save();
-    //         res.redirect('/customer/' + req.params.customerId);
-    //     });
-    // },
-
     create: (req, res) => {
         let newEvent = new Event(req.body);
-        newEvent.name = mongoose.Types.ObjectId(req.params.customerId);
+        newEvent.customer = mongoose.Types.ObjectId(req.params.customerId);
         newEvent.user = res.locals.userId;
         newEvent.save();
 
